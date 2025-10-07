@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThirdwebProvider } from "thirdweb/react";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,10 +28,50 @@ export default function RootLayout({
   return (
     <ThirdwebProvider>
     <html lang="en">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const savedTheme = localStorage.getItem('sniffer-theme');
+                if (savedTheme === 'light') {
+                  document.body.classList.remove('dark');
+                } else {
+                  document.body.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#1a1a1a',
+              color: '#ffffff',
+              border: '1px solid #333333',
+              borderRadius: '12px',
+            },
+            success: {
+              style: {
+                background: '#10b981',
+                color: '#ffffff',
+              },
+            },
+            error: {
+              style: {
+                background: '#ef4444',
+                color: '#ffffff',
+              },
+            },
+          }}
+        />
       </body>
       </html>
       </ThirdwebProvider>
