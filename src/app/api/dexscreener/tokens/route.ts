@@ -71,8 +71,6 @@ interface DexScreenerResponse {
  * Get reliable token image URL with known Base token mappings
  */
 function getTokenImageUrl(address: string, symbol: string): string {
-  const lowerAddress = address.toLowerCase();
-  
   // Use ui-avatars.com for all tokens to avoid 404 errors
   // This creates consistent, reliable token icons for all tokens
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=6366f1&color=ffffff&size=40&bold=true`;

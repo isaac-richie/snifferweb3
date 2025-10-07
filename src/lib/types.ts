@@ -60,13 +60,19 @@ export interface TokenExplorerProps {
   tokens: BaseToken[];
 }
 
+export interface SocialProfileMetadata {
+  address?: string;
+  name?: string;
+  [key: string]: unknown;
+}
+
 export interface SocialProfile {
   type: string;
   name?: string;
   address: string;
   avatar?: string;
   bio?: string;
-  metadata?: any;
+  metadata?: SocialProfileMetadata;
 }
 
 export interface WalletProfilerProps {
